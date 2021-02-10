@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,8 +16,13 @@ use App\Http\Controllers\MainController;
 */
 
 Route::get('/', [MainController::class, 'index']);
+Route::post('/submit', [MainController::class, 'submit'])->name('submit');
 Route::get('/locale/{id}', [MainController::class, 'language']);
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+// Route::middleware(['auth'])-->group(function () {
+//     return view('dashboard');
+// })->name('dashboard');
+Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function () {
+    Route::get('/', [AdminController::class, 'index'])->name('dashboard');
+    Route::get('/why', [AdminController::class, 'why'])->name('why');
+});

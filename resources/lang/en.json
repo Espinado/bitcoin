@@ -10,6 +10,11 @@
     "scroll": "Scroll down",
     "first" : "First step",
     "second": "Second step",
-    "third" : "Third step"
+    "third" : "Third step",
+    "name" : "Your name",
+    "mail" : "Your email",
+    "message": "Your message",
+    "send": "Message sent",
+    "not_send": "Message not sent"
 
 }

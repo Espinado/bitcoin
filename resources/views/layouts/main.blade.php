@@ -37,6 +37,18 @@
 </head>
 
 <body>
+    @if ($message = Session::get('success'))
+<div class="alert alert-success alert-block">
+	<button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>{{ $message }}</strong>
+</div>
+@endif
+@if ($message = Session::get('error'))
+<div class="alert alert-danger alert-block">
+	<button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>{{ $message }}</strong>
+</div>
+@endif
     <div id="home"></div>
     <div class="main_menu_wrap fixed-top">
         <div class="container">
@@ -296,22 +308,23 @@
             <div class="row">
                 <div class="col-12">
                     <div class="mail_wrapp">
-                        <form action="" method="post" class="contact_form" novalidate="novalidate" data-status="init">
-                            <label>Your name
+                        <form action="{{route('submit')}}" method="POST" class="contact_form" novalidate="novalidate" data-status="init">
+                            @csrf
+                            <label>{{ __('name') }}
                                 <span class="control_wrapp your-name">
-                                    <input type="text" name="your-name" value="" size="40" aria-required="true"
+                                    <input type="text" name="name" value="" size="40" aria-required="true"
                                         aria-invalid="false">
                                 </span>
                             </label>
-                            <label>Your email
+                            <label>{{ __('mail') }}
                                 <span class="control_wrapp your-email">
-                                    <input type="email" name="your-email" value="" size="40" aria-required="true"
+                                    <input type="email" name="email" value="" size="40" aria-required="true"
                                         aria-invalid="false">
                                 </span>
                             </label>
-                            <label> Your message
+                            <label> {{ __('message') }}
                                 <span class="control_wrapp your-message">
-                                    <textarea name="your-message" cols="40" rows="10" aria-required="true"
+                                    <textarea name="message" cols="40" rows="10" aria-required="true"
                                         aria-invalid="false"></textarea>
                                 </span>
                             </label>

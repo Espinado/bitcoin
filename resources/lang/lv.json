@@ -10,6 +10,11 @@
     "scroll": "Uz leju",
     "first" : "Pirmais solis",
     "second": "Otrais solis",
-    "third" : "Trešais solos"
+    "third" : "Trešais solis",
+    "name" : "Jūsu vards",
+    "mail" : "Epasta adrese",
+    "message": "Jūsu ziņojums",
+    "send": "Ziņojums nosutīts",
+    "not_send": "Ziņojums nav nosutīts"
 
 }
