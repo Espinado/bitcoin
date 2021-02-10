@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\AdminController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,10 +20,12 @@ Route::get('/', [MainController::class, 'index']);
 Route::post('/submit', [MainController::class, 'submit'])->name('submit');
 Route::get('/locale/{id}', [MainController::class, 'language']);
 
-// Route::middleware(['auth'])-->group(function () {
-//     return view('dashboard');
-// })->name('dashboard');
+
+
 Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function () {
     Route::get('/', [AdminController::class, 'index'])->name('dashboard');
     Route::get('/why', [AdminController::class, 'why'])->name('why');
+    Route::post('/add_about', [AdminController::class, 'add_about'])->name('add_about');
+
 });
+

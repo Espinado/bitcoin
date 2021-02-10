@@ -12,10 +12,12 @@
             </div>
         </div>
     </div> --}}
-<form type="text">
-    @foreach (array_values(config('locale.languages')) as $language)
-About -{{ $language[3] }}
-<textarea></textarea><br>
-    @endforeach
-</form>
+    <form action="{{route('add_about')}}" method="POST" class="contact_form" novalidate="novalidate" data-status="init">
+        @csrf
+        @foreach (array_values(config('locale.languages')) as $language)
+            About -{{ $language[3] }}
+            <textarea name="about_{{ $language[0] }}"></textarea><br>
+        @endforeach
+        <input type="submit" value="OK" class="form-submit btn btn-primary">
+    </form>
 </x-app-layout>

@@ -6,12 +6,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\App;
 use App\Models\Message;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\sendingEmail;
+
+
+
 
 
 class MainController extends Controller
 {
     public function index()
     {
+
         return view('layouts.main');
     }
 
@@ -39,6 +45,16 @@ class MainController extends Controller
            $message->email=$request->email;
            $message->message=$request->message;
            $message->save();
+
+
+           $data = array(
+            'name' => $request->name,
+            'message' => $request->message
+        );
+
+        Mail::to('Receiver Email Address')->send(new sendingEmail($data));
+
+
            return back()->with('success',__('send'));
 
         } catch (\Exception $exception) {

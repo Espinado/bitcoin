@@ -11,7 +11,8 @@ class AdminController extends Controller
         return view('dashboard');
     }
 
-    public function why() {
-        
+    public function add_about(request $request) {
+
+        dd($request->all());
     }
 }
