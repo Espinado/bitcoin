@@ -29,8 +29,11 @@
     <form action="{{ route('add_about') }}" method="POST" class="contact_form" novalidate="novalidate"
         data-status="init">
         @csrf
-        @foreach (array_values(config('locale.languages')) as $language)
+
+        @foreach (array_values(config('locale.languages')) as $key=>$language)
+
             @if (property_exists($about, $language[0]))
+
 
             @endif
             About -{{ $language[3] }}_1

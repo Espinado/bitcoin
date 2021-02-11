@@ -7,12 +7,19 @@ use Illuminate\Http\Request;
 use App\Models\Description;
 
 class AdminController extends Controller
+
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
+        $langs = array_values(config('locale.languages'));
+
         $description = Description::find(1);
         $about = json_decode($description->about);
-        return view('dashboard', compact('about'));
+        return view('dashboard', compact('about', 'langs'));
     }
 
     public function add_about(request $request)
