@@ -171,17 +171,19 @@
         <div class="container">
             <h2>{{ __('about') }}</h2>
             <div class="row justify-content-center">
+                @foreach ($text as $key=>$value)
                 <div class="col-12 col-md-6 col-lg-3">
                     <div class="about_us_tab">
                         <h4>
-                            Who we are
+                            {{ $value }}
                         </h4>
                         <div class="content">
-                            who_are_we
+                           {{$value}}
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-6 col-lg-3">
+                @endforeach
+                {{-- <div class="col-12 col-md-6 col-lg-3">
                     <div class="about_us_tab">
                         <h4>
                             What we do
@@ -190,8 +192,8 @@
                             what_we_do
                         </div>
                     </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-3">
+                </div> --}}
+                {{-- <div class="col-12 col-md-6 col-lg-3">
                     <div class="about_us_tab">
                         <h4>
                             Why we do it
@@ -200,7 +202,7 @@
                             why_we_do_it
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </section>

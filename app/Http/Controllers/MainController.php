@@ -8,8 +8,7 @@ use Illuminate\Support\Facades\App;
 use App\Models\Message;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\sendingEmail;
-
-
+use App\Models\Description;
 
 
 
@@ -17,8 +16,18 @@ class MainController extends Controller
 {
     public function index()
     {
-
-        return view('layouts.main');
+        $description = Description::first();
+        $text = [];
+        $about = json_decode($description->about);
+        foreach ($about as $key => $value) {
+            if ($key === App::getLocale()) {
+                foreach ($value as $k => $val) {
+                    array_push($text, $val);
+                }
+            }
+        }
+       
+        return view('layouts.main', compact('text'));
     }
 
 
@@ -36,30 +45,29 @@ class MainController extends Controller
         }
     }
 
-    public function submit(request $request) {
+    public function submit(request $request)
+    {
 
 
-        try{
-           $message =new Message;
-           $message->name=$request->name;
-           $message->email=$request->email;
-           $message->message=$request->message;
-           $message->save();
+        try {
+            $message = new Message;
+            $message->name = $request->name;
+            $message->email = $request->email;
+            $message->message = $request->message;
+            $message->save();
 
 
-           $data = array(
-            'name' => $request->name,
-            'message' => $request->message
-        );
+            $data = array(
+                'name' => $request->name,
+                'message' => $request->message
+            );
 
-        Mail::to('Receiver Email Address')->send(new sendingEmail($data));
+            Mail::to('Receiver Email Address')->send(new sendingEmail($data));
 
 
-           return back()->with('success',__('send'));
-
+            return back()->with('success', __('send'));
         } catch (\Exception $exception) {
-            return back()->with('error',__('not_send'));
+            return back()->with('error', __('not_send'));
         }
-
     }
 }

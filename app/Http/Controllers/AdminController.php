@@ -17,8 +17,7 @@ class AdminController extends Controller
     {
         $langs = array_values(config('locale.languages'));
 
-        $description=Description::first();
-        // dd($description);
+        $description = Description::first();
         if ($description) {
             $about = json_decode($description->about);
         } else {
@@ -44,7 +43,7 @@ class AdminController extends Controller
                 $about->about = json_encode($array);
                 $about->save();
             }
-                 return back()->with('success', 'done');
+            return back()->with('success', 'done');
         } catch (\Exception $exception) {
             return back()->with('error', 'error');
         }
