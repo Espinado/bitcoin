@@ -15,16 +15,13 @@ class AdminController extends Controller
     }
     public function index()
     {
-        $langs = array_values(config('locale.languages'));
-
         $description = Description::first();
         if ($description) {
             $about = json_decode($description->about);
         } else {
             $about = null;
         }
-
-        return view('dashboard', compact('about', 'langs'));
+        return view('dashboard', compact('about'));
     }
 
     public function add_about(request $request)
