@@ -39,7 +39,7 @@ return [
     'digits_between' => 'The :attribute must be between :min and :max digits.',
     'dimensions' => 'The :attribute has invalid image dimensions.',
     'distinct' => 'The :attribute field has a duplicate value.',
-    'email' => 'Поле :attribute должно быть заполнено действительный е-мэйл адресом',
+    'email' => 'Laukumu :attribute jāaizpilda ar derīgo epasta adresi',
     'ends_with' => 'The :attribute must end with one of the following: :values.',
     'exists' => 'The selected :attribute is invalid.',
     'file' => 'The :attribute must be a file.',
@@ -97,7 +97,7 @@ return [
     'password' => 'The password is incorrect.',
     'present' => 'The :attribute field must be present.',
     'regex' => 'The :attribute format is invalid.',
-    'required' => 'Поле :attribute обязательно к заполнению.',
+    'required' => 'Laukums :attribute obligāti jāaizpilda',
     'required_if' => 'The :attribute field is required when :other is :value.',
     'required_unless' => 'The :attribute field is required unless :other is in :values.',
     'required_with' => 'The :attribute field is required when :values is present.',
@@ -148,10 +148,10 @@ return [
     */
 
     'attributes' => [
-        'title'  =>'Заголовок',
-        'name' =>  'Имя',
-        'email' => 'Электронная почта',
-        'message' => 'Сообщение'
+        'title'  =>'Nosaukums',
+        'name' =>  'Vards',
+        'email' => 'e-pasta adrese',
+        'message' => 'Ziņojums'
     ],
 
 ];

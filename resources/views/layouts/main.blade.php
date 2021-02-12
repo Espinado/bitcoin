@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>AssetsHub</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/theme.css') }}">
     <link rel="stylesheet" href="{{ asset('css/all.min.css') }}">
-
     <script src="{{ mix('js/app.js') }}" defer></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
@@ -24,31 +23,28 @@
     <script type="application/javascript">
         $(document).ready(function() {
             $('#language').on('change', function() {
-
                 window.location = './locale/' + this.value;
             });
-
         });
 
     </script>
 
-
-
 </head>
 
 <body>
+
     @if ($message = Session::get('success'))
-<div class="alert alert-success alert-block">
-	<button type="button" class="close" data-dismiss="alert">×</button>
-        <strong>{{ $message }}</strong>
-</div>
-@endif
-@if ($message = Session::get('error'))
-<div class="alert alert-danger alert-block">
-	<button type="button" class="close" data-dismiss="alert">×</button>
-        <strong>{{ $message }}</strong>
-</div>
-@endif
+        <div class="alert alert-success alert-block">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>{{ $message }}</strong>
+        </div>
+    @endif
+    @if ($message = Session::get('error'))
+        <div class="alert alert-danger alert-block">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>{{ $message }}</strong>
+        </div>
+    @endif
     <div id="home"></div>
     <div class="main_menu_wrap fixed-top">
         <div class="container">
@@ -89,7 +85,7 @@
                             <a href="#home" class="nav-link">{{ __('home') }}</a>
                         </li>
                         <li class="nav-item main-item">
-                            <a href="#about_us" class="nav-link">{{  __('about') }}</a>
+                            <a href="#about_us" class="nav-link">{{ __('about') }}</a>
                         </li>
                         <li class="nav-item main-item">
                             <a href="#why_us" class="nav-link">{{ __('trade') }}</a>
@@ -127,6 +123,15 @@
                     {{-- </div> --}}
                 </div>
             </nav>
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         </div>
     </div>
     <header class="head-banner parallax-banner">
@@ -160,7 +165,7 @@
                             <div class="mouse">
                                 <i class="fas fa-arrow-down"></i>
                             </div>
-                           {{__('scroll')}}
+                            {{ __('scroll') }}
                         </a>
                     </div>
                 </div>
@@ -171,38 +176,18 @@
         <div class="container">
             <h2>{{ __('about') }}</h2>
             <div class="row justify-content-center">
-                @foreach ($text as $key=>$value)
-                <div class="col-12 col-md-6 col-lg-3">
-                    <div class="about_us_tab">
-                        <h4>
-                            {{ $value }}
-                        </h4>
-                        <div class="content">
-                           {{$value}}
+                @foreach ($about_array as $key => $value)
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <div class="about_us_tab">
+                            <h4>
+                                {{ $value }}
+                            </h4>
+                            <div class="content">
+                                {{ $value }}
+                            </div>
                         </div>
                     </div>
-                </div>
                 @endforeach
-                {{-- <div class="col-12 col-md-6 col-lg-3">
-                    <div class="about_us_tab">
-                        <h4>
-                            What we do
-                        </h4>
-                        <div class="content">
-                            what_we_do
-                        </div>
-                    </div>
-                </div> --}}
-                {{-- <div class="col-12 col-md-6 col-lg-3">
-                    <div class="about_us_tab">
-                        <h4>
-                            Why we do it
-                        </h4>
-                        <div class="content">
-                            why_we_do_it
-                        </div>
-                    </div>
-                </div> --}}
             </div>
         </div>
     </section>
@@ -210,66 +195,19 @@
         <div class="container h-100">
             <h2>{{ __('why') }}</h2>
             <div class="row h-100 align-items-center">
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="reason_wrapp">
-                        <div class="reason_num">
-                            1
-                        </div>
-                        <div class="reason_text">
-                            1_reason
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="reason_wrapp">
-                        <div class="reason_num">
-                            2
-                        </div>
-                        <div class="reason_text">
-                            2_reason
+                @foreach ($why_array as $key => $value)
+
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="reason_wrapp">
+                            <div class="reason_num">
+                                {{ $key+1 }}
+                            </div>
+                            <div class="reason_text">
+                                {{ $value }}
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="reason_wrapp">
-                        <div class="reason_num">
-                            3
-                        </div>
-                        <div class="reason_text">
-                            3_reason
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="reason_wrapp">
-                        <div class="reason_num">
-                            4
-                        </div>
-                        <div class="reason_text">
-                            4_reason
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="reason_wrapp">
-                        <div class="reason_num">
-                            5
-                        </div>
-                        <div class="reason_text">
-                            5_reason
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="reason_wrapp">
-                        <div class="reason_num">
-                            6
-                        </div>
-                        <div class="reason_text">
-                            6_reason
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
@@ -305,12 +243,14 @@
         </div>
     </section>
     <section id="contact_us">
+
         <div class="container">
             <h2>{{ __('contact') }}</h2>
             <div class="row">
                 <div class="col-12">
                     <div class="mail_wrapp">
-                        <form action="{{route('submit')}}" method="POST" class="contact_form" novalidate="novalidate" data-status="init">
+                        <form action="{{ route('submit') }}" method="POST" class="contact_form"
+                            novalidate="novalidate" data-status="init">
                             @csrf
                             <label>{{ __('name') }}
                                 <span class="control_wrapp your-name">

@@ -24,7 +24,7 @@ Route::get('/locale/{id}', [MainController::class, 'language']);
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function () {
     Route::get('/', [AdminController::class, 'index'])->name('dashboard');
-    Route::get('/why', [AdminController::class, 'why'])->name('why');
+    Route::post('/add_why', [AdminController::class, 'add_why'])->name('add_why');
     Route::post('/add_about', [AdminController::class, 'add_about'])->name('add_about');
 
 });

@@ -17,19 +17,33 @@ class MainController extends Controller
     public function index()
     {
         $description = Description::first();
-        $text = [];
-        $about = json_decode($description->about);
-        foreach ($about as $key => $value) {
-            if ($key === App::getLocale()) {
-                foreach ($value as $k => $val) {
-                    array_push($text, $val);
+        $about_array = [];
+        $why_array = [];
+        if ($description) {
+            $about = json_decode($description->about);
+            $why = json_decode($description->why);
+            foreach ($about as $key => $value) {
+                // parsing json to array
+                if ($key === App::getLocale()) {
+                    foreach ($value as $k => $val) {
+                        array_push($about_array, $val);
+                    }
                 }
             }
+            foreach ($why as $key => $value) {
+                if ($key === App::getLocale()) {
+                    foreach ($value as $k => $val) {
+                        array_push($why_array, $val);
+                    }
+                }
+            }
+        } else {
+            $about_array = null;
+            $why_array = null;
         }
-       
-        return view('layouts.main', compact('text'));
-    }
 
+        return view('layouts.main', compact('about_array', 'why_array'));
+    }
 
     public function language(Request $request, string $language)
     {
@@ -47,8 +61,11 @@ class MainController extends Controller
 
     public function submit(request $request)
     {
-
-
+        $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|email',
+            'message' => 'required|max:255',
+        ]);
         try {
             $message = new Message;
             $message->name = $request->name;
@@ -56,15 +73,10 @@ class MainController extends Controller
             $message->message = $request->message;
             $message->save();
 
-
             $data = array(
                 'name' => $request->name,
                 'message' => $request->message
             );
-
-            Mail::to('Receiver Email Address')->send(new sendingEmail($data));
-
-
             return back()->with('success', __('send'));
         } catch (\Exception $exception) {
             return back()->with('error', __('not_send'));
